@@ -1,4 +1,294 @@
-  <!-- NEW FLAVOUR SECTION -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crown Shisha - Flavours</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --primary-gold: #c9a96e;
+            --secondary-gold: #b8941f;
+            --accent-gold: #f4e4bc;
+            --dark-bg: #0f0f0f;
+            --darker-bg: #000000;
+            --card-bg: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8b8;
+            --text-muted: #808080;
+            --border-color: rgba(201, 169, 110, 0.15);
+            --success-color: #28a745;
+            --light-bg: #f8f9fa;
+            --light-text: #333333;
+            --light-card: #ffffff;
+        }
+        [data-theme="light"] {
+            --dark-bg: #ffffff;
+            --darker-bg: #f8f9fa;
+            --card-bg: #f8f9fa;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #6a6a6a;
+            --border-color: rgba(201, 169, 110, 0.25);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+        .heading-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        .section-badge {
+            display: inline-block;
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .flavours {
+            padding: 120px 0;
+            background: var(--card-bg);
+            position: relative;
+            overflow: hidden;
+        }
+        .flavours::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+        }
+        .flavour-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .flavour-tab {
+            padding: 12px 24px;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .flavour-tab.active {
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-gold));
+            color: var(--darker-bg);
+            border-color: var(--primary-gold);
+            box-shadow: 0 5px 15px rgba(201, 169, 110, 0.2);
+        }
+        .flavour-tab:hover:not(.active) {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+        .flavour-content {
+            display: none;
+        }
+        .flavour-content.active {
+            display: block;
+        }
+        .flavour-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .flavour-card {
+            background: var(--dark-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .flavour-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .flavour-card-header {
+            padding: 1.5rem;
+            background: linear-gradient(45deg, rgba(201, 169, 110, 0.1), transparent);
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .flavour-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: var(--darker-bg);
+        }
+        .flavour-card-body {
+            padding: 1.5rem;
+        }
+        .flavour-card-body h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        .flavour-card-body p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .flavour-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .flavour-popularity {
+            display: flex;
+            align-items: center;
+            color: var(--primary-gold);
+            font-size: 0.9rem;
+        }
+        .flavour-popularity i {
+            margin-right: 0.3rem;
+        }
+        .flavour-tag {
+            background: rgba(201, 169, 110, 0.1);
+            color: var(--primary-gold);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .flavour-category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            text-align: center;
+            margin: 4rem 0 2rem;
+            color: var(--primary-gold);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        .flavour-category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: var(--primary-gold);
+        }
+        .flavour-note {
+            display: flex;
+            align-items: center;
+            background: var(--dark-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+        .note-icon {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+        .flavour-note p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            .flavour-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .flavour-note {
+                flex-direction: column;
+                text-align: center;
+            }
+            .note-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            .flavour-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            .flavour-tab {
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
     <section class="flavours" id="flavours">
         <div class="container">
             <div class="section-header fade-in">
@@ -266,4 +556,45 @@
                 <p>Each flavour in our collection is meticulously selected from premium international suppliers and expertly prepared to ensure consistent quality. Our exclusive blends are available only through Crown Shisha Catering. Contact us for seasonal specials and custom flavor combinations tailored to your event theme.</p>
             </div>
         </div>
-    </section> 
+    </section>
+
+    <script>
+        // Flavour Tab Functionality
+        document.querySelectorAll('.flavour-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.flavour-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Hide all content
+                document.querySelectorAll('.flavour-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show the selected content
+                const category = tab.getAttribute('data-category');
+                document.getElementById(`${category}-content`).classList.add('active');
+            });
+        });
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
